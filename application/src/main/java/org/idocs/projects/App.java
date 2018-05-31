@@ -76,7 +76,7 @@ public class App {
 		int averageMinSeen = (int) Math.round(movies.stream().mapToInt(m -> m.getTimeSpentbyPerson()).summaryStatistics().getAverage());
 		Map<Integer,List<Movie>> map= streamSupplier.get().collect(Collectors.groupingBy(m-> Math.abs(m.length-averageMinSeen)));
 		Integer key = map.keySet().stream().mapToInt(x ->x).summaryStatistics().getMin();
-		Movie reccomendedT  = map.get(key).get(0);
+		int total= key+averageMinSeen;
 		
 		Map<String,List<Movie>> map2= streamSupplier.get().collect(Collectors.groupingBy(m-> m.genre));
 		Stream<Entry<String, List<Movie>>> sortedList = map2.entrySet().stream().sorted(new Comparator<Entry<String,List<Movie>>>() {
@@ -95,7 +95,7 @@ public class App {
 		});
 
 		List<Entry<String, List<Movie>>> listOfGenres = sortedList.collect(Collectors.toList());
-		return "\nReccomended movie regarding duration: "+reccomendedT.getTitle()+
+		return "\nReccomended movie duration: "+total+
 				"\nRecomended genres: "+ listOfGenres.get(0).getKey()+","+listOfGenres.get(1).getKey();
 	}
 
