@@ -58,5 +58,9 @@ public class Movie{
 	}
 	
 	
+	public int getPercentage() {
+		return (this.getTimeSpentbyPerson()*100)/this.getLength();
+	}
+	
 
 }

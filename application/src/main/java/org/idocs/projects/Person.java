@@ -27,15 +27,16 @@ public class Person {
 	
 
 	//method to parse a Movie object from a line
-	public void printPercentages() {
-
-		System.out.println("\nPerson: "+this.getName());
+	public  String getPercentages() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("\nPerson: "+this.getName());
 		
 		this.getMovies().stream().forEach(m-> {
 		int percentage = (m.getTimeSpentbyPerson()*100)/m.getLength();
-		System.out.println(m.getTitle()+": "+percentage+"% seen");
+		builder.append("\n"+m.getTitle()+": "+percentage+"% seen");
 		});
-		System.out.println("Average percentage:"+
-					(int)this.getMovies().stream().mapToInt(m-> (m.getTimeSpentbyPerson()*100)/m.getLength()).summaryStatistics().getAverage()+"%");
+		builder.append("\nAverage percentage:"+
+					(int)this.getMovies().stream().mapToInt(m-> (m.getTimeSpentbyPerson()*100)/m.getLength()).summaryStatistics().getAverage()+"%\n");
+		return builder.toString();
 	}
 }
